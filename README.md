@@ -49,7 +49,7 @@ In development:
 ## Installation
 
 1. Install ZeroMQ for MQL5 [https://github.com/dingmaotu/mql-zmq](https://github.com/dingmaotu/mql-zmq)
-2. Put the following files from this repo to your MetaEditor Iinclude` directory
+2. Put the following files from this repo to your MetaEditor Include directory
    - `Include/Json.mqh`
    - `Include/controlerrors.mqh`
    - `Include/StringToEnumInt.mqh`
