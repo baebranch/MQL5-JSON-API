@@ -548,18 +548,21 @@ void GetAccountInfo()
    CJAVal info;
 
    info["error"] = false;
-   info["broker"] = AccountInfoString(ACCOUNT_COMPANY);
-   info["currency"] = AccountInfoString(ACCOUNT_CURRENCY);
-   info["server"] = AccountInfoString(ACCOUNT_SERVER);
-   info["trading_allowed"] = TerminalInfoInteger(TERMINAL_TRADE_ALLOWED);
-   info["bot_trading"] = AccountInfoInteger(ACCOUNT_TRADE_EXPERT);
-   info["balance"] = AccountInfoDouble(ACCOUNT_BALANCE);
-   info["equity"] = AccountInfoDouble(ACCOUNT_EQUITY);
+   info["gmt_time"] = (string) TimeGMT();
+   info["server_time"] = (string) TimeCurrent();
+   info["unix_time"] = (int) TimeCurrent();
    info["margin"] = AccountInfoDouble(ACCOUNT_MARGIN);
-   info["margin_free"] = AccountInfoDouble(ACCOUNT_MARGIN_FREE);
-   info["margin_level"] = AccountInfoDouble(ACCOUNT_MARGIN_LEVEL);
+   info["server"] = AccountInfoString(ACCOUNT_SERVER);
+   info["equity"] = AccountInfoDouble(ACCOUNT_EQUITY);
+   info["broker"] = AccountInfoString(ACCOUNT_COMPANY);
+   info["balance"] = AccountInfoDouble(ACCOUNT_BALANCE);
+   info["currency"] = AccountInfoString(ACCOUNT_CURRENCY);
    info["leverage"] = AccountInfoInteger(ACCOUNT_LEVERAGE);
-   info["daylight_savings"] = TimeDaylightSavings() == 0;
+   info["margin_free"] = AccountInfoDouble(ACCOUNT_MARGIN_FREE);
+   info["daylight_savings_offset"] = (int) TimeDaylightSavings();
+   info["bot_trading"] = AccountInfoInteger(ACCOUNT_TRADE_EXPERT);
+   info["margin_level"] = AccountInfoDouble(ACCOUNT_MARGIN_LEVEL);
+   info["trading_allowed"] = TerminalInfoInteger(TERMINAL_TRADE_ALLOWED);
 
    string t=info.Serialize();
    if(debug)
@@ -665,7 +668,7 @@ void OrderDoneOrError(bool error, string funcName, CTrade &trade)
 
    conf["error"]=(bool) error;
    conf["retcode"]=(int) trade.ResultRetcode();
-   conf["desription"]=(string) GetRetcodeID(trade.ResultRetcode());
+   conf["description"]=(string) GetRetcodeID(trade.ResultRetcode());
 // conf["deal"]=(int) trade.ResultDeal();
    conf["order"]=(int) trade.ResultOrder();
    conf["volume"]=(double) trade.ResultVolume();
